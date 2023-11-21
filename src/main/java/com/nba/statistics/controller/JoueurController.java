@@ -110,5 +110,17 @@ public class JoueurController {
         return responseData;
     }
 
+    @GetMapping("/classement")
+    public ResponseData<Joueur> getClassement() {
+        ResponseData<Joueur> responseData = new ResponseData<>();
+        responseData.setData(this.joueurService.getClassementJoueurs());
+        return responseData;
+    }
 
+    @GetMapping("/classement/equipe/{id}")
+    public ResponseData<Joueur> getClassement(@PathVariable("id") int id) {
+        ResponseData<Joueur> responseData = new ResponseData<>();
+        responseData.setData(this.joueurService.getClassementJoueurParEquipe(id));
+        return responseData;
+    }
 }
