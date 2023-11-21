@@ -1,5 +1,8 @@
 package com.nba.statistics.repository;
 
-public interface TempsJoueurMatchRepository <TempsJoueurMatch,Long>
+import com.nba.statistics.model.TempsJoueurMatch;
+import org.springframework.data.repository.CrudRepository;
+
+public interface TempsJoueurMatchRepository extends CrudRepository<TempsJoueurMatch,Long>
 {
 }

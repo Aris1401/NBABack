@@ -14,7 +14,7 @@ public class TempsJoueurMatchController
 {
     private final TempsJoueurMatchRepository tempsJoueurMatchRepository;
 
-    public TempsJoueurMatchController(ActionRepository tempsJoueurMatchRepository)
+    public TempsJoueurMatchController(TempsJoueurMatchRepository tempsJoueurMatchRepository)
     {
         this.tempsJoueurMatchRepository = tempsJoueurMatchRepository;
     }
@@ -25,7 +25,7 @@ public class TempsJoueurMatchController
     }
 
     @PostMapping("/tempsJoueurMatch")
-    public Action save(@RequestBody TempsJoueurMatch tempsJoueurMatch) {
+    public TempsJoueurMatch save(@RequestBody TempsJoueurMatch tempsJoueurMatch) {
         return this.tempsJoueurMatchRepository.save(tempsJoueurMatch);
     }
 }

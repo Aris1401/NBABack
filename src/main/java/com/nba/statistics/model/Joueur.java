@@ -14,11 +14,20 @@ public class Joueur
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int idJoueur;
     String nom;
+    String prenom;
     Date dateNaissance;
     int idEquipe;
-@Transient
-    JoueurService joueurService;
+//@Transient
+//    JoueurService joueurService;
 
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
     public int getIdJoueur() {
         return idJoueur;
@@ -52,54 +61,54 @@ public class Joueur
         this.idEquipe = idEquipe;
     }
 ///////////////////////////////////////////////////////////////////////////
-    public double getMatchJouer()
-    {
-        return joueurService.getMatchJouer(idJoueur);
-    }
-///////////////////////////////////////////////////////////////////////////
-    public double getMatchs()
-    {
-      return joueurService.getMatchs(idEquipe);
-    }
-///////////////////////////////////////////////////////////////////////////
-    public double getPointParMatch()
-    {
-        return joueurService.getPointParMatch(idJoueur);
-    }
-///////////////////////////////////////////////////////////////////////////
-public double getRebondParMatch()
-{
-    return joueurService.getPointParMatch(idJoueur);
-}
-///////////////////////////////////////////////////////////////////////////
-public double getPassesDecisif()
-{
-    return joueurService.getPointParMatch(idJoueur);
-}
-//////////////////////////////////////////////////////////////////////////
-public double getMinutesParMatch()
-{
-    return joueurService.getMinutesParMatch(idJoueur);
-}
-///////////////////////////////////////////////////////////////////////////
-public double getEfficacite()
-{
-    return joueurService.getEfficacite(idJoueur);
-}
-///////////////////////////////////////////////////////////////////////////
-public double getPourcentagesTiresReussi()
-{
-    return joueurService.getPourcentagesTiresReussi(idJoueur);
-}
-///////////////////////////////////////////////////////////////////////////
-public double getPourcentagesTires3P()
-{
-    return joueurService.getPourcentagesTires3P(idJoueur);
-}
-public double getPourcentagesReussiteLancerFront()
-{
-    return joueurService.getPourcentagesReussiteLancerFront(idJoueur);
-}
-
+//    public double getMatchJouer()
+//    {
+//        return joueurService.getMatchJouer(idJoueur);
+//    }
+/////////////////////////////////////////////////////////////////////////////
+//    public double getMatchs()
+//    {
+//      return joueurService.getMatchs(idEquipe);
+//    }
+/////////////////////////////////////////////////////////////////////////////
+//    public double getPointParMatch()
+//    {
+//        return joueurService.getPointParMatch(idJoueur);
+//    }
+/////////////////////////////////////////////////////////////////////////////
+//public double getRebondParMatch()
+//{
+//    return joueurService.getPointParMatch(idJoueur);
+//}
+/////////////////////////////////////////////////////////////////////////////
+//public double getPassesDecisif()
+//{
+//    return joueurService.getPointParMatch(idJoueur);
+//}
+////////////////////////////////////////////////////////////////////////////
+//public double getMinutesParMatch()
+//{
+//    return joueurService.getMinutesParMatch(idJoueur);
+//}
+/////////////////////////////////////////////////////////////////////////////
+//public double getEfficacite()
+//{
+//    return joueurService.getEfficacite(idJoueur);
+//}
+/////////////////////////////////////////////////////////////////////////////
+//public double getPourcentagesTiresReussi()
+//{
+//    return joueurService.getPourcentagesTiresReussi(idJoueur);
+//}
+/////////////////////////////////////////////////////////////////////////////
+//public double getPourcentagesTires3P()
+//{
+//    return joueurService.getPourcentagesTires3P(idJoueur);
+//}
+//public double getPourcentagesReussiteLancerFront()
+//{
+//    return joueurService.getPourcentagesReussiteLancerFront(idJoueur);
+//}
+//
 
 }
