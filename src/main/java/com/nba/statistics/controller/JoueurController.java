@@ -44,7 +44,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/M")
     public ResponseData<Double> getMatchs(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getMatchs(id));
+        responseData.addToData(this.joueurRepository.getMatchsJoueur(id));
         return responseData;
     }
 
