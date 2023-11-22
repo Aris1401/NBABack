@@ -1,7 +1,6 @@
 package com.nba.statistics.model;
 
 import com.nba.statistics.repository.JoueurRepository;
-import com.nba.statistics.service.JoueurService;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 

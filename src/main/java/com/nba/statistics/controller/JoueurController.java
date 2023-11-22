@@ -3,7 +3,6 @@ package com.nba.statistics.controller;
 import com.nba.statistics.model.Joueur;
 import com.nba.statistics.repository.JoueurRepository;
 import com.nba.statistics.repsonse.ResponseData;
-import com.nba.statistics.service.JoueurService;
 import com.nba.statistics.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,6 @@ import java.util.Comparator;
 @RestController
 public class JoueurController {
     private final JoueurRepository joueurRepository;
-    @Autowired
-    private JoueurService joueurService;
 
     public JoueurController(JoueurRepository joueurRepository) {
         this.joueurRepository = joueurRepository;
