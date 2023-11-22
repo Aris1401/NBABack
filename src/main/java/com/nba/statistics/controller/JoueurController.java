@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 @RestController
-public class JoueurController {
+public class    JoueurController {
     private final JoueurRepository joueurRepository;
 
     public JoueurController(JoueurRepository joueurRepository) {
