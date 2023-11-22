@@ -4,7 +4,9 @@ import com.nba.statistics.model.Action;
 import com.nba.statistics.model.Joueur;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface JoueurRepository extends CrudRepository<Joueur, Long> {
     public Iterable<Joueur> findByIdEquipe(int idEquipe);
     @Query("select count(idMatch) from ActionMatch where idJoueur=?1 GROUP BY idMatch")
