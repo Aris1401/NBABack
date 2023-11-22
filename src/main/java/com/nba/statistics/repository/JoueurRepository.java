@@ -11,7 +11,7 @@ public interface JoueurRepository extends CrudRepository<Joueur, Long> {
     @Query("select j from Joueur j where j.equipe=?1")
 
     public Iterable<Joueur> getByEquipe(int idEquipe);
-    @Query("select count(distinct(idMatch)) as nombre from ActionMatch where idJoueur=?1 GROUP BY idMatch, idJoueur")
+    @Query("select count(distinct(idMatch)) as nombre from ActionMatch where idJoueur=?1 GROUP BY idMatch")
     public Double getMatchJouerParJoueur(int idJoueur);
 
     @Query("SELECT count(idMatch) as nombre FROM Match WHERE equipeAway=?1 or equipeHome=?1")
