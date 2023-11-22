@@ -14,8 +14,11 @@ import java.util.Comparator;
 @Service
 public class JoueurService
 {
-    @Autowired
     private JoueurRepository joueurRepository;
+
+    public JoueurService(JoueurRepository repo) {
+        this.joueurRepository = repo;
+    }
 
     public double getMatchJouer(int idJoueur)
     {
