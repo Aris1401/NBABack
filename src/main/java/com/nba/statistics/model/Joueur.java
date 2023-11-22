@@ -15,7 +15,9 @@ public class Joueur
     String nom;
     String prenom;
     Date dateNaissance;
-    int idEquipe;
+    @ManyToOne
+    @JoinColumn(name = "idEquipe")
+    Equipe equipe;
 //@Transient
 //    JoueurService joueurService;
 
@@ -52,12 +54,12 @@ public class Joueur
         this.dateNaissance = dateNaissance;
     }
 
-    public int getIdEquipe() {
-        return idEquipe;
+    public Equipe getEquipe() {
+        return equipe;
     }
 
-    public void setIdEquipe(int idEquipe) {
-        this.idEquipe = idEquipe;
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
     }
 ///////////////////////////////////////////////////////////////////////////
 //    public double getMatchJouer()

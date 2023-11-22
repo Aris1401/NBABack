@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 @RestController
-public class    JoueurController {
+public class   JoueurController {
     private final JoueurRepository joueurRepository;
 
     public JoueurController(JoueurRepository joueurRepository) {
@@ -112,7 +112,12 @@ public class    JoueurController {
     public ResponseData<Joueur> getClassement() {
         ArrayList<Joueur> joueurs = (ArrayList<Joueur>) Utility.iterableToCollection(this.joueurRepository.findAll());
 
-        joueurs.sort(Comparator.comparingDouble(joueur -> joueurRepository.getPointParMatch(joueur.getIdJoueur())));
+        joueurs.sort(Comparator.comparingDouble(joueur -> {
+            int idJoueur = joueur.getIdJoueur();
+            System.out.println(idJoueur);
+            double points = this.joueurRepository.getPointParMatch(idJoueur);
+            return points;
+        }));
 
         ResponseData<Joueur> responseData = new ResponseData<>();
         responseData.setData(joueurs);
@@ -121,9 +126,9 @@ public class    JoueurController {
 
     @GetMapping("/classement/equipe/{id}")
     public ResponseData<Joueur> getClassement(@PathVariable("id") int id) {
-        ArrayList<Joueur> joueurs = (ArrayList<Joueur>) Utility.iterableToCollection(this.joueurRepository.findByIdEquipe(id));
+        ArrayList<Joueur> joueurs = (ArrayList<Joueur>) Utility.iterableToCollection(this.joueurRepository.getByEquipe(id));
 
-        joueurs.sort(Comparator.comparingDouble(joueur -> joueurRepository.getPointParMatch(joueur.getIdJoueur())));
+        joueurs.sort(Comparator.comparingDouble(joueur -> this.joueurRepository.getPointParMatch(joueur.getIdJoueur())));
 
         ResponseData<Joueur> responseData = new ResponseData<>();
         responseData.setData(joueurs);
