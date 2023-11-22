@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @RestController
 public class JoueurController {
@@ -35,7 +36,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/MJ")
     public ResponseData<Double> getMatchJouee(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getMatchJouer(id));
+        responseData.addToData(joueurRepository.getMatchJouerParJoueur(id));
         return responseData;
     }
 
@@ -51,7 +52,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/PMP")
     public ResponseData<Double> getPointParMatch(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getPointParMatch(id));
+        responseData.addToData(joueurRepository.getPointParMatch(id)/ joueurRepository.getMatchJouerParJoueur(id));
         return responseData;
     }
 
@@ -59,7 +60,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/RPM")
     public ResponseData<Double> getRebondParMatch(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getRebondParMatch(id));
+        responseData.addToData(joueurRepository.getRebondParMatch(id));
         return responseData;
     }
 
@@ -67,7 +68,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/PDPM")
     public ResponseData<Double> getPassesDecisif(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getPassesDecisifParMatch(id));
+        responseData.addToData(joueurRepository.getPassesDecisifParMatch(id));
         return responseData;
     }
 
@@ -75,7 +76,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/MPM")
     public ResponseData<Double> getMinutesParMatch(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getMinutesParMatch(id));
+        responseData.addToData(joueurRepository.getMinutesParMatch(id));
         return responseData;
     }
 
@@ -83,7 +84,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/EFF")
     public ResponseData<Double> getEfficacite(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getEfficacite(id));
+        responseData.addToData(null);
         return responseData;
     }
 
@@ -91,7 +92,7 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/FG")
     public ResponseData<Double> getPourcentagesTiresReussi(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getPourcentagesTiresReussi(id));
+        responseData.addToData((joueurRepository.getTotalTirsReussis(id) / joueurRepository.getTotalTirs(id)) * 100);
         return responseData;
     }
 
@@ -99,28 +100,36 @@ public class JoueurController {
     @GetMapping("/joueurs/{id}/3P")
     public ResponseData<Double> getPourcentagesTires3P(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getPourcentagesTires3P(id));
+        responseData.addToData((joueurRepository.getTotalTirs3PReussi(id) / joueurRepository.getTotalTirs3P(id)) * 100);
         return responseData;
     }
 
     @GetMapping("/joueurs/{id}/LF")
     public ResponseData<Double> getPourcentagesReussiteLancerFront(@PathVariable("id") int id) {
         ResponseData<Double> responseData = new ResponseData<>();
-        responseData.addToData(this.joueurService.getPourcentagesReussiteLancerFront(id));
+        responseData.addToData(joueurRepository.getTotalTirsLFReussi(id) / joueurRepository.getTotalTirsLF(id));
         return responseData;
     }
 
     @GetMapping("/classement")
     public ResponseData<Joueur> getClassement() {
+        ArrayList<Joueur> joueurs = (ArrayList<Joueur>) Utility.iterableToCollection(this.joueurRepository.findAll());
+
+        joueurs.sort(Comparator.comparingDouble(joueur -> joueurRepository.getPointParMatch(joueur.getIdJoueur())));
+
         ResponseData<Joueur> responseData = new ResponseData<>();
-        responseData.setData(this.joueurService.getClassementJoueurs());
+        responseData.setData(joueurs);
         return responseData;
     }
 
     @GetMapping("/classement/equipe/{id}")
     public ResponseData<Joueur> getClassement(@PathVariable("id") int id) {
+        ArrayList<Joueur> joueurs = (ArrayList<Joueur>) Utility.iterableToCollection(this.joueurRepository.findByIdEquipe(id));
+
+        joueurs.sort(Comparator.comparingDouble(joueur -> joueurRepository.getPointParMatch(joueur.getIdJoueur())));
+
         ResponseData<Joueur> responseData = new ResponseData<>();
-        responseData.setData(this.joueurService.getClassementJoueurParEquipe(id));
+        responseData.setData(joueurs);
         return responseData;
     }
 }
